@@ -12,7 +12,7 @@ export const screenLg = "992px";
 export const screenXl = "1200px";
 
 export const CustomContainer = styled.div`
-  width: 85%;
+  width: 95%;
   margin: 0 auto;
   max-width: 1400px;
 `;
