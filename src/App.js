@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import SideBar from "./components/Sidebar";
-import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/login-page";
 import RegisterPage from "./pages/register-page";
 import ShopPage from "./pages/shop-page";
@@ -17,7 +16,7 @@ const App = () => {
         <Route
           exact
           path="/"
-          render={() => <HomePage setIsOpen={setIsOpen} />}
+          render={() => <ShopPage setIsOpen={setIsOpen} />}
         />
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/login" component={LoginPage} />

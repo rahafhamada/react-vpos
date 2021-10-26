@@ -2,12 +2,11 @@ import styled from "styled-components";
 import { main } from "../../variables";
 
 export const ShopPageWrapper = styled.div`
-  margin-top: 120px;
-
   .product-item-wrapper {
     border: 1px solid #eee;
     padding: 10px;
     text-align: center;
+    cursor: pointer;
 
     button {
       all: unset;
@@ -25,18 +24,66 @@ export const ShopPageWrapper = styled.div`
 
 export const ShopPageContent = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 29px;
 `;
 
 export const ShopPageProductsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
+  max-height: 450px;
+  overflow-y: auto;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${main};
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
 `;
 
 export const ShopPageProductsCart = styled.div`
+  max-height: 450px;
+  overflow-y: auto;
   height: fit-content;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${main};
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
 `;
 
 export const ShopPageProductsCartItem = styled.div`
@@ -44,10 +91,11 @@ export const ShopPageProductsCartItem = styled.div`
   margin-bottom: 7px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 7px;
+    border: 1px solid #eee;
+    padding: 10px;
   }
 
   svg {
@@ -58,10 +106,36 @@ export const ShopPageProductsCartItem = styled.div`
   }
 `;
 
+export const ShopPageProductsCartItemName = styled.div`
+  font-weight: 600;
+  margin: 0 10px;
+`;
+
+export const ShopPageProductsCartItemQty = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+
+  svg {
+    color: #000;
+    margin: 0;
+    font-size: 0.9rem;
+    background-color: #ebebeb;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+  }
+
+  span {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 10px;
+  }
+`;
+
 export const ShopPageBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-top: 30px;
 
   button {
@@ -72,6 +146,7 @@ export const ShopPageBtnWrapper = styled.div`
     cursor: pointer;
     border-radius: 5px;
     transition: 0.3s ease-in-out;
+    margin-right: 15px;
 
     &:hover {
       background-color: ${main};

@@ -1,8 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../../components/Navbar";
 import ProductItem from "../../components/ProductItem";
 import PRODUCTS from "../../dummy-data/products";
 import { BsFillTrashFill } from "react-icons/bs";
+import {
+  addItemToCart,
+  clearItemFromCart,
+  decreaseItemQty,
+} from "../../redux/cart/cart.action";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { CustomContainer } from "../../variables";
 import {
   ShopPageWrapper,
@@ -11,10 +17,15 @@ import {
   ShopPageProductsCart,
   ShopPageProductsCartItem,
   ShopPageBtnWrapper,
+  ShopPageProductsCartItemName,
+  ShopPageProductsCartItemQty,
 } from "./shop-page-styles";
 
 const ShopPage = ({ setIsOpen }) => {
   const { cartItems } = useSelector(({ cart }) => cart);
+
+  const dispatch = useDispatch();
+
   return (
     <ShopPageWrapper>
       <Navbar setIsOpen={setIsOpen} isDark />
@@ -28,10 +39,40 @@ const ShopPage = ({ setIsOpen }) => {
           <ShopPageProductsCart>
             <h4 style={{ marginBottom: 15 }}>Cart's Products</h4>
             {!cartItems?.length && <h4>No product</h4>}
-            {cartItems?.map(({ id, name, price, quantity }) => (
-              <ShopPageProductsCartItem key={id}>
-                {name}: {quantity} X {price} = <b> {price * quantity} EUR</b>{" "}
-                <BsFillTrashFill />
+            {cartItems?.map((item, idx) => (
+              <ShopPageProductsCartItem key={item.id}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  #{idx + 1}:{" "}
+                  <ShopPageProductsCartItemName>
+                    {item.name}
+                  </ShopPageProductsCartItemName>
+                  <ShopPageProductsCartItemQty>
+                    <AiOutlinePlus
+                      onClick={() => dispatch(addItemToCart(item))}
+                    />{" "}
+                    <span>{item.quantity}</span>{" "}
+                    <AiOutlineMinus
+                      onClick={() => {
+                        dispatch(decreaseItemQty(item));
+                      }}
+                    />
+                  </ShopPageProductsCartItemQty>{" "}
+                  =
+                  <b style={{ marginLeft: 10 }}>
+                    {" "}
+                    {item.price * item.quantity} EUR
+                  </b>
+                </div>
+                <div>
+                  <BsFillTrashFill
+                    onClick={() => dispatch(clearItemFromCart(item?.id))}
+                  />
+                </div>
               </ShopPageProductsCartItem>
             ))}
             {cartItems?.length >= 1 ? (
@@ -41,7 +82,6 @@ const ShopPage = ({ setIsOpen }) => {
                   (prev, curr) => prev + curr.price * curr.quantity,
                   0
                 )}{" "}
-                EUR
               </h3>
             ) : null}
             <ShopPageBtnWrapper>
