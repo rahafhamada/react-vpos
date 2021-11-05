@@ -11,3 +11,59 @@ body {
 a {
   text-decoration: none;
 }
+.table-wrapper {
+  overflow-y: auto;
+  max-height: 450px;
+  border: 1px solid #c91942;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.table-wrapper::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #c91942;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #c91942;
+}
+
+#customers {
+  border-collapse: collapse;
+  width: 100%;
+  height: fit-content;
+  font-size: 0.8rem;
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 0.8rem;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 7px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #c91942;
+  color: white;
+}

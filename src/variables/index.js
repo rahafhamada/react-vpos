@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // Colors
-export const main = "#ff006e";
+export const main = "#c91942";
 export const secondColor = "#ff5d8f";
 export const blackColor = "#0c0c0c";
 

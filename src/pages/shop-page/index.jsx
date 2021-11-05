@@ -14,10 +14,7 @@ import {
   ShopPageWrapper,
   ShopPageProductsGrid,
   ShopPageContent,
-  ShopPageProductsCart,
-  ShopPageProductsCartItem,
   ShopPageBtnWrapper,
-  ShopPageProductsCartItemName,
   ShopPageProductsCartItemQty,
 } from "./shop-page-styles";
 
@@ -36,45 +33,73 @@ const ShopPage = ({ setIsOpen }) => {
               <ProductItem key={item.id} item={item} />
             ))}
           </ShopPageProductsGrid>
-          <ShopPageProductsCart>
-            <h4 style={{ marginBottom: 15 }}>Cart's Products</h4>
-            {!cartItems?.length && <h4>No product</h4>}
-            {cartItems?.map((item, idx) => (
-              <ShopPageProductsCartItem key={item.id}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  #{idx + 1}:{" "}
-                  <ShopPageProductsCartItemName>
-                    {item.name}
-                  </ShopPageProductsCartItemName>
-                  <ShopPageProductsCartItemQty>
-                    <AiOutlinePlus
-                      onClick={() => dispatch(addItemToCart(item))}
-                    />{" "}
-                    <span>{item.quantity}</span>{" "}
-                    <AiOutlineMinus
-                      onClick={() => {
-                        dispatch(decreaseItemQty(item));
-                      }}
-                    />
-                  </ShopPageProductsCartItemQty>{" "}
-                  =
-                  <b style={{ marginLeft: 10 }}>
-                    {" "}
-                    {item.price * item.quantity} EUR
-                  </b>
+          <div>
+            {cartItems?.length >= 1 && (
+              <>
+                {" "}
+                <div className="table-wrapper">
+                  <table id="customers">
+                    <thead>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Action</th>
+                    </thead>
+
+                    {cartItems?.map((item, idx) => (
+                      <tr style={{ height: 50 }}>
+                        <td>{idx + 1}</td>
+                        <td>{item.name}</td>
+                        <td
+                          style={{
+                            textAlign: "center",
+                            fontSize: "1rem",
+                          }}
+                        >
+                          <ShopPageProductsCartItemQty>
+                            <AiOutlinePlus
+                              onClick={() => dispatch(addItemToCart(item))}
+                            />{" "}
+                            <span style={{ fontSize: ".8rem" }}>
+                              {item.quantity}
+                            </span>{" "}
+                            <AiOutlineMinus
+                              onClick={() => {
+                                dispatch(decreaseItemQty(item));
+                              }}
+                            />
+                          </ShopPageProductsCartItemQty>
+                        </td>
+                        <td>{item.price * item.quantity}</td>
+
+                        <td
+                          style={{
+                            textAlign: "center",
+                            fontSize: "1rem",
+                            color: "red",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <BsFillTrashFill
+                            onClick={() =>
+                              dispatch(clearItemFromCart(item?.id))
+                            }
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </table>
                 </div>
-                <div>
-                  <BsFillTrashFill
-                    onClick={() => dispatch(clearItemFromCart(item?.id))}
-                  />
-                </div>
-              </ShopPageProductsCartItem>
-            ))}
+                <ShopPageBtnWrapper>
+                  <button>Payment</button>
+                  <button>Refund</button>
+                  <button>Reset</button>
+                  <button>Open Till</button>
+                </ShopPageBtnWrapper>{" "}
+              </>
+            )}
+
             {cartItems?.length >= 1 ? (
               <h3 style={{ marginTop: 25 }}>
                 Total:{" "}
@@ -84,13 +109,7 @@ const ShopPage = ({ setIsOpen }) => {
                 )}{" "}
               </h3>
             ) : null}
-            <ShopPageBtnWrapper>
-              <button>Payment</button>
-              <button>Refund</button>
-              <button>Reset</button>
-              <button>Open Till</button>
-            </ShopPageBtnWrapper>
-          </ShopPageProductsCart>
+          </div>
         </ShopPageContent>
       </CustomContainer>
     </ShopPageWrapper>

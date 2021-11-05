@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import SideBar from "./components/Sidebar";
 import LoginPage from "./pages/login-page";
 import RegisterPage from "./pages/register-page";
@@ -22,7 +22,7 @@ const App = () => {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/shop" component={ShopPage} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

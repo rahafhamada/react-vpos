@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { main } from "../../variables";
 
 export const ShopPageWrapper = styled.div`
+  margin-bottom: 100px;
+
   .product-item-wrapper {
     border: 1px solid #eee;
     padding: 10px;
@@ -124,6 +126,13 @@ export const ShopPageProductsCartItemQty = styled.div`
     width: 20px;
     height: 20px;
     padding: 4px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #ff006e;
+      color: #fff;
+    }
   }
 
   span {
